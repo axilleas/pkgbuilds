@@ -22,7 +22,8 @@ optdepends=('gstreamer0.10-plugins: for more open formats'
 		'protobuf: for Spotify support'
 		'libspotify: for Spotify support'
 		'libqca: for Spotify support') 
-makedepends=('git' 'boost' 'cmake' 'mesa')
+makedepends=('git' 'boost' 'cmake')
+install=clementine.install
 provides=('clementine')
 conflicts=('clementine')
 source=()
