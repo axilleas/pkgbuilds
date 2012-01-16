@@ -1,0 +1,26 @@
+# Maintainer: z0id	<mihai@m1x.ro> 
+# Contributor: vande198 <jakevanderkolk@gmail.com>
+
+pkgname=fbxkb
+pkgver=0.6
+pkgrel=2
+pkgdesc="Keyboard indicator and switcher"
+arch=('i686' 'x86_64')
+url="http://fbxkb.sourceforge.net/"
+depends=('gtk2')
+makedepends=('libxmu' 'libx11')
+license=('GPL')
+source=(http://download.sourceforge.net/fbxkb/${pkgname}-${pkgver}.tgz
+	fbxkb.patch)
+
+build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    unset LDFLAGS
+    # thanks to mastergreg :)
+		patch -Np1 -i "${srcdir}/fbxkb.patch" 
+    ./configure --prefix=/usr
+    make 
+    make PREFIX="${pkgdir}/usr" install
+}
+md5sums=('fa768bbb07aac8a4ae590633499cce15'
+         'b977f68692f2f213420093f6c4bf5cd5')
