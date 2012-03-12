@@ -26,6 +26,8 @@ oldpkgver=`grep pkgver $path | head -n1 | cut -c 8-13`
 
 echo "Changing pkgver..."
 sed -i "s/$oldpkgver/$pkgver/" $path
+echo "# old pkgver: $oldpkgver"
+echo "# new pkgver: $pkgver"
 sleep 1
 
 echo "Changing x86_64 sha1sums..."
@@ -57,7 +59,6 @@ burp $(source PKGBUILD; echo ${pkgname}-${pkgver}-${pkgrel}.src.tar.gz)
 echo
 echo "Upload complete."
 echo
-fi
 
 sleep 1
 echo -n "Do you want to build firefox-beta-bin-$pkgver and install it? [Y/n]" 
@@ -79,4 +80,4 @@ rm firefox-beta-bin-$pkgver-1.src.tar.gz
 rm firefox-beta-bin-$pkgver-1-i686.pkg.tar.xz
 rm firefox-$pkgver.tar.bz2
 
-
+fi
