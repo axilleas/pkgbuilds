@@ -61,18 +61,17 @@ echo "Upload complete."
 echo
 
 sleep 1
-echo -n "Do you want to build firefox-beta-bin-$pkgver and install it? [Y/n]" 
-read install
+read -p "Do you want to build firefox-beta-bin-$pkgver and install it? [y/n]" install
 	case $install in 
 		[Yy]* ) echo "Cool, let's build it!"
-						makepkg -fcsi
-						;;
+				makepkg -fcsi
+				;;
 
 		[Nn]* ) echo "Ok, maybe another time."
-						exit 1
-						;;
-				* )	echo "Answer y or n."
-						;;
+				exit 1
+				;;
+		* )	echo "Answer y or n."
+				;;
 	esac
 
 rm $sha
