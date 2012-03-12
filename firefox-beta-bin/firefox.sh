@@ -55,7 +55,7 @@ echo "Uploading to AUR in 2 ..."
 sleep 1
 echo "Uploading to AUR in 1 ..."
 sleep 1
-burp $(source PKGBUILD; echo ${pkgname}-${pkgver}-${pkgrel}.src.tar.gz) 
+burp $(source $path; echo ${pkgname}-${pkgver}-${pkgrel}.src.tar.gz) 
 echo
 echo "Upload complete."
 echo
