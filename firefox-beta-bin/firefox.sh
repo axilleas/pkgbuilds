@@ -1,49 +1,60 @@
 #!/bin/bash
 
-pkgver="$1"
-link="ftp://ftp.mozilla.org/pub/firefox/releases/$pkgver/SHA1SUMS"
-path="/home/bukowski/aur/firefox-beta-bin/PKGBUILD"
-sha="SHA1SUMS-$pkgver"
+newpkgver="$1"
+$arch='uname -m'
+# Link of SHA1SUMS file
+link="ftp://ftp.mozilla.org/pub/firefox/releases/$newpkgver/SHA1SUMS"
+# SHA1SUMS file rename
+sha="SHA1SUMS-$newpkgver"
 
+# Current path
+pwdir=$PWD
+# Path where the PKGBUILD resides
+path="$HOME/aur/firefox-beta-bin"
 
-echo "Downloading sha..."
+cd $path
+
+echo "Checking if version exists..."
 echo
 wget $link >& /dev/null
-mv SHA1SUMS SHA1SUMS-$pkgver
 
-if [ -f $sha ]; then
+if [ -f SHA1SUMS ]; then
+mv SHA1SUMS SHA1SUMS-$newpkgver
+echo "Version $newpkgver exists. Starting build process."
+echo
 
-# Defining variables
-newsha64=`grep -w "linux-x86_64/en-US/firefox-$pkgver.tar.bz2" $sha | awk 'NR==1{print $1}'`
-newsha32=`grep -w "linux-i686/en-US/firefox-$pkgver.tar.bz2" $sha | awk 'NR==1{print $1}'`
+# Striping SHA1SUM from downloaded file
+newsha64=`grep -w "linux-x86_64/en-US/firefox-$newpkgver.tar.bz2" $sha | awk 'NR==1{print $1}'`
+newsha32=`grep -w "linux-i686/en-US/firefox-$newpkgver.tar.bz2" $sha | awk 'NR==1{print $1}'`
 
-oldsha64=`grep sha1sums $path | head -n1 | cut -c 12-51`
-oldsha32=`grep sha1sums $path | tail -n1 | cut -c 42-81`
+# Append old SHA1SUMS to variables
+oldsha64=`grep sha1sums PKGBUILD | head -n1 | cut -c 12-51`
+oldsha32=`grep sha1sums PKGBUILD | tail -n1 | cut -c 42-81`
 
-# pkg version
-oldpkgver=`grep pkgver $path | head -n1 | cut -c 8-13` 
-
+# Old package version
+oldpkgver=`grep pkgver PKGBUILD | head -n1 | cut -c 8-13` 
 
 echo "Changing pkgver..."
-sed -i "s/$oldpkgver/$pkgver/" $path
-echo "# old pkgver: $oldpkgver"
-echo "# new pkgver: $pkgver"
+sed -i "s/$oldpkgver/$newpkgver/" PKGBUILD
+echo "# old pkgver: $oldpkgver "
+echo "# new pkgver: $newpkgver "  
 sleep 1
-
+echo
 echo "Changing x86_64 sha1sums..."
-sed -i "s/$oldsha64/$newsha64/" $path 
+sed -i "s/$oldsha64/$newsha64/" PKGBUILD
 echo "# old sha1sum firefox-x86_64: $oldsha64 "
 echo "# new sha1sum firefox-x86_64: $newsha64 "  
 sleep 1
 echo
 echo "Changing i686 sha1sums..."
-sed -i "s/$oldsha32/$newsha32/" $path 
+sed -i "s/$oldsha32/$newsha32/" PKGBUILD
 echo "# old sha1sum firefox-i686: $oldsha32   "
 echo "# new sha1sum firefox-i686: $newsha32   "
 sleep 1
 echo
 echo "Making source package..."
 makepkg -f --source
+source PKGBUILD
 echo
 echo "Uploading to AUR in 5 ..."
 sleep 1
@@ -55,28 +66,61 @@ echo "Uploading to AUR in 2 ..."
 sleep 1
 echo "Uploading to AUR in 1 ..."
 sleep 1
-burp $(source $path; echo ${pkgname}-${pkgver}-${pkgrel}.src.tar.gz) 
+burp $(echo ${pkgname}-${newpkgver}-${pkgrel}.src.tar.gz) 
 echo
 echo "Upload complete."
 echo
 
+
 sleep 1
-read -p "Do you want to build firefox-beta-bin-$pkgver and install it? [y/n]" install
+
+echo -n "Do you want to build $pkgname-$newpkgver and install it? [Y/n]" 
+read install
 	case $install in 
 		[Yy]* ) echo "Cool, let's build it!"
-				makepkg -fcsi
-				;;
+						makepkg -fcsi
+						;;
 
 		[Nn]* ) echo "Ok, maybe another time."
-				exit 1
-				;;
-		* )	echo "Answer y or n."
-				;;
+						exit 1
+						;;
+				* )	echo "Answer y or n."
+						;;
 	esac
 
-rm $sha
-rm firefox-beta-bin-$pkgver-1.src.tar.gz
-rm firefox-beta-bin-$pkgver-1-i686.pkg.tar.xz
-rm firefox-$pkgver.tar.bz2
+echo "Removing unnecessary files..."
 
+if [ -f $sha ]; then
+	echo "Removing $sha: Done."
+	rm $sha
+	else
+	echo "$sha: Not found."
 fi
+
+if [ -f $pkgname-$newpkgver-1.src.tar.gz ]; then
+	echo "Removing `$pkgname-$newpkgver-$pkgrel.src.tar.gz`: Done."
+	rm $pkgname-$newpkgver-$pkgrel.src.tar.gz
+	else
+	echo	"`$pkgname-$newpkgver-$pkgrel.src.tar.gz`: Not found."
+fi
+
+if [ -f $pkgname-$newpkgver-$pkgrel-$arch.pkg.tar.xz ]; then
+	echo "Removing `$pkgname-$newpkgver-$pkgrel-i686.pkg.tar.xz`: Done."
+	rm $pkgname-$newpkgver-$pkgrel-$arch.pkg.tar.xz
+	else 
+	echo "`$pkgname-$newpkgver-$pkgrel-$arch.pkg.tar.xz`: Not found."
+fi
+
+if [ -f firefox-$newpkgver.tar.bz2 ]; then
+	echo "Removing `firefox-$newpkgver.tar.bz2`: Done."
+	rm firefox-$newpkgver.tar.bz2
+	else
+	echo "`firefox-$newpkgver.tar.bz2`: Not found."
+fi
+
+else
+echo "Version $newpkgver does not exist. You already have the latest build."
+rm SHA1SUM* >& /dev/null
+fi # end of first if
+
+cd $pwdir
