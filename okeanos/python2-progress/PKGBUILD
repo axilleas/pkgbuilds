@@ -1,0 +1,24 @@
+# Maintainer: Axilleas Pipinellis <axilleas@archlinux.gr>
+
+pkgname=python2-progress
+_pkgname=progress
+pkgver=1.0.1
+pkgrel=1
+pkgdesc="Easy to use progress bars"
+url="http://docs.dev.grnet.gr/pypi/"
+arch=('any')
+license=('ISC')
+depends=(python2)
+makedepends=(python2-distribute) 
+source=(http://docs.dev.grnet.gr/pypi/$_pkgname-$pkgver.tar.gz)
+md5sums=('73ec2b6b5d2ed0ffb53c7f2a7d79a23e')
+
+package() {
+
+  cd "$srcdir/$_pkgname-$pkgver"
+  python2 setup.py install --root="$pkgdir" -O1
+  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}
+
+# vim:set ts=2 sw=2 et:
+
