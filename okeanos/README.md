@@ -1,7 +1,7 @@
 * Archlinux pkgbuilds for the [Okeanos Infrastructure] (https://okeanos.grnet.gr/welcome/).
 * Precompiled binaries can be found at http://animal.foss.ntua.gr/~axil/archlinux/okeanos
 
-Currently there is only `kamaki` tool included.
+Currently only `kamaki` tool is included.
 
 #./kamaki
 By invoking `kamaki` you get a list of permittable operations. 
