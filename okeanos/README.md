@@ -104,7 +104,7 @@ we get a list of our available servers. Let's say we have two of them:
     2800 ftpbackup
     2801 webserver
 
-With the following command we reboot our ftpbackup with key-id 2800:
+With the following command we reboot our `ftpbackup` with key-id `2800`:
 
     $ kamaki server reboot 2800
 
