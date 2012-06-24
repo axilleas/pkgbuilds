@@ -3,18 +3,19 @@
 **Currently only `kamaki` tool is included.**
 
 ##Installation
-Precompiled binaries can be found at http://animal.foss.ntua.gr/~axil/archlinux/okeanos. Just add to your `/etc/pacman.conf` the following
+Precompiled binaries can be found at http://animal.foss.ntua.gr/~axil/archlinux/okeanos. 
+Just add to your `/etc/pacman.conf` the following:
 
     [okeanos]
     Server = http://animal.foss.ntua.gr/~axil/archlinux/okeanos
 	
-and install `kamaki` with
+and install `kamaki` with:
 
     # pacman -Syu python2-kamaki-git
 
 
 ##./kamaki
-By invoking `kamaki` you get a list of permittable operations. 
+By invoking `kamaki` you get a list of allowable operations. 
 
     usage: kamaki <group> <command>
 
