@@ -1,9 +1,19 @@
-* Archlinux pkgbuilds for the [Okeanos Infrastructure] (https://okeanos.grnet.gr/welcome/).
-* Precompiled binaries can be found at http://animal.foss.ntua.gr/~axil/archlinux/okeanos
+# Archlinux pkgbuilds for the [Okeanos Infrastructure] (https://okeanos.grnet.gr/welcome/).
 
-Currently only `kamaki` tool is included.
+**Currently only `kamaki` tool is included.**
 
-#./kamaki
+##Installation
+Precompiled binaries can be found at http://animal.foss.ntua.gr/~axil/archlinux/okeanos. Just add to your `/etc/pacman.conf` the following
+
+    [okeanos]
+    Server = http://animal.foss.ntua.gr/~axil/archlinux/okeanos
+	
+and install `kamaki` with
+
+    # pacman -Syu python2-kamaki-git
+
+
+##./kamaki
 By invoking `kamaki` you get a list of permittable operations. 
 
     usage: kamaki <group> <command>
