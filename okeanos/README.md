@@ -10,7 +10,7 @@ By invoking `kamaki` you get a list of permittable operations.
 
 	Groups
 		Commands
-
+```
   config       Configuration commands
 	|		
 	|--	list			List configuration options
@@ -89,6 +89,7 @@ By invoking `kamaki` you get a list of permittable operations.
   astakos      Astakos API commands
 	|
 	`--	authenticate		Authenticate a user
+```
 
 ###kamakirc
 If you own an account at okeanos, remeber to copy `kamakirc` to `$HOME/.kamakirc` and place your API key to global configuration.
@@ -96,9 +97,10 @@ If you own an account at okeanos, remeber to copy `kamakirc` to `$HOME/.kamakirc
 ##Example
 ### Reboot of a server
 By invoking 
- `$ kamaki server list`
+```$ kamaki server list```
 we get a list of our available servers. Let's say we have two of them:
-- 2800 ftpbackup
-- 2801 webserver
+``` 2800 ftpbackup
+	2801 webserver
+```
 With the following command we reboot our ftpbackup with key-id 2800:
-` $ kamaki server reboot 2800`
+``` $ kamaki server reboot 2800```
