@@ -6,8 +6,9 @@ Currently there is only `kamaki` tool included.
 #./kamaki
 By invoking `kamaki` you get a list of permittable operations. 
 
+    usage: kamaki <group> <command>
+
 ```	
-	usage: kamaki <group> <command>
 
   config       Configuration commands
 	|		
@@ -95,12 +96,12 @@ If you own an account at okeanos, remeber to copy `kamakirc` to `$HOME/.kamakirc
 ###Example
 #### Rebooting a server
 By invoking 
- $ kamaki server list
+    $ kamaki server list
 
 we get a list of our available servers. Let's say we have two of them:
- 2800 ftpbackup
- 2801 webserver
+    2800 ftpbackup
+    2801 webserver
 
 With the following command we reboot our ftpbackup with key-id 2800:
- $ kamaki server reboot 2800
+    $ kamaki server reboot 2800
 
