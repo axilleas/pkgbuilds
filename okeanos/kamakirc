@@ -1,6 +1,6 @@
 [global]
 colors = on
-token = "enter your API key found under Options->API Access without quotes"
+token = "enter your API key found under Options->API Access (without quotes)"
 
 [compute]
 enable = on
@@ -15,7 +15,7 @@ url = https://cyclades.okeanos.grnet.gr/plankton
 enable = on
 pithos_extensions = on
 url = https://pithos.okeanos.grnet.gr/v1
-account = "enter your registered mail without quotes"
+account = "enter your registered mail (without quotes)"
 container = pithos
 
 [astakos]
