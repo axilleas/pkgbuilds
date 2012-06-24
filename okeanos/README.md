@@ -6,7 +6,8 @@ Currently there is only `kamaki` tool included.
 #./kamaki
 By invoking `kamaki` you get a list of permittable operations. 
 
-```	usage: kamaki <group> <command>
+```	
+	usage: kamaki <group> <command>
 
   config       Configuration commands
 	|		
