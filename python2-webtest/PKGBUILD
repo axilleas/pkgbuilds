@@ -2,7 +2,7 @@
 #Contributor: David Campbell <davekong@archlinux.us>
 #Contributor: Cilyan Olowen <gaknar@gmail.com>
 #Contributor: Frederik M.J.V. <freqmod VED iskrembilen Dott kom>
-pkgname=pythoni2-webtest
+pkgname=python2-webtest
 pkgver=1.4.0
 pkgrel=1
 pkgdesc="Helper to test WSGI applications"
