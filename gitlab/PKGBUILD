@@ -6,10 +6,10 @@ pkgname=gitlab
 pkgver=7.3.2
 pkgrel=1
 pkgdesc="Project management and code hosting application"
-arch=('i686' 'x86_64')
+arch=('i686' 'x86_64' 'armv5h' 'armv6h' 'armv7h')
 url="http://gitlab.org/gitlab-ce"
 license=('MIT')
-depends=('ruby>=2.0' 'git>=1.7.10' 'ruby-bundler>=1.5.2' 'gitlab-shell>=2.0.1' 'openssh' 'redis>=2.0' 'libxslt' 'icu')
+depends=('ruby>=2.0' 'git>=1.7.10' 'ruby-bundler>=1.5.2' 'gitlab-shell>=2.0.1' 'openssh' 'redis>=2.0' 'libxslt' 'icu' 'nodejs')
 makedepends=('cmake')
 optdepends=(
 	'mariadb: database backend'
@@ -93,6 +93,10 @@ prepare() {
 	fi
 
 	cd "${srcdir}/${_srcdir}"
+
+  # Patch Gemfile and Gemfile.lock, get rid off therubyracer and its deps.
+  # Use nodejs instead and avoid installation problems in arm architectures.
+  sed -ri '/therubyracer|libv8|ref/d' Gemfile{,.lock}
 
 	# Patching config files:
 	sed -e "s|# user: git|user: gitlab|" \

@@ -6,6 +6,9 @@ pkgbase = gitlab
 	install = gitlab.install
 	arch = i686
 	arch = x86_64
+	arch = armv5h
+	arch = armv6h
+	arch = armv7h
 	license = MIT
 	makedepends = cmake
 	depends = ruby>=2.0
@@ -16,6 +19,7 @@ pkgbase = gitlab
 	depends = redis>=2.0
 	depends = libxslt
 	depends = icu
+  depends = nodejs
 	optdepends = mariadb: database backend
 	optdepends = postgresql>=9.1: database backend
 	optdepends = python2-docutils: reStructuredText markup language support
